@@ -1,6 +1,6 @@
-const addButton = document.getElementById("btn-add");
-const removeButton = document.getElementById("btn-remove");
-const resetButton = document.getElementById("btn-reset");
+const addButton = document.getElementById("add-btn");
+const removeButton = document.getElementById("remove-btn");
+const resetButton = document.getElementById("reset-btn");
 const counter = document.getElementById("counter");
 
 function addToCounter() {

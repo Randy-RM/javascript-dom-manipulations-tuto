@@ -1,9 +1,16 @@
-const buttonRemove = document.getElementById("btn-remove");
-const buttonAdd = document.getElementById("btn-add");
+const removeButton = document.getElementById("btn-remove");
+const addButton = document.getElementById("btn-add");
 const counter = document.getElementById("counter");
-const buttonReset = document.getElementById("btn-reset");
+const resetButton = document.getElementById("btn-reset");
 
 function addToCounter() {
-  const nombre = Number(counter.innerHTML);
-  counter.innerHTML = `${nombre + 1}`;
+  const currentCounterValue = Number(counter.innerHTML);
+  counter.innerHTML = `${currentCounterValue + 1}`;
+}
+
+function removeToCounter() {
+  const currentCounterValue = Number(counter.innerHTML);
+  if (currentCounterValue > 0) {
+    counter.innerHTML = `${currentCounterValue - 1}`;
+  }
 }

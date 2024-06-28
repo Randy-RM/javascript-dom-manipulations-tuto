@@ -14,3 +14,7 @@ function removeToCounter() {
     counter.innerHTML = `${currentCounterValue - 1}`;
   }
 }
+
+function resetCounter() {
+  compteur.innerHTML = "0";
+}

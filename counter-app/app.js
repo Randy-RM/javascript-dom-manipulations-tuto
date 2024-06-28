@@ -16,5 +16,5 @@ function removeToCounter() {
 }
 
 function resetCounter() {
-  compteur.innerHTML = "0";
+  counter.innerHTML = "0";
 }

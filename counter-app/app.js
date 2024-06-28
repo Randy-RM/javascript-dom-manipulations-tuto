@@ -1,7 +1,7 @@
-const removeButton = document.getElementById("btn-remove");
 const addButton = document.getElementById("btn-add");
-const counter = document.getElementById("counter");
+const removeButton = document.getElementById("btn-remove");
 const resetButton = document.getElementById("btn-reset");
+const counter = document.getElementById("counter");
 
 function addToCounter() {
   const currentCounterValue = Number(counter.innerHTML);
@@ -18,3 +18,7 @@ function removeToCounter() {
 function resetCounter() {
   counter.innerHTML = "0";
 }
+
+addButton.addEventListener("click", addToCounter);
+removeButton.addEventListener("click", removeToCounter);
+resetButton.addEventListener("click", resetCounter);

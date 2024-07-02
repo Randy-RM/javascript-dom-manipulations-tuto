@@ -35,3 +35,8 @@ const addTaskItemToTaskList = () => {
   }
   inputTask.value = "";
 };
+
+addTaskButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  addTaskItemToTaskList();
+});

@@ -1,6 +1,6 @@
-const displayToysListButton = document.getElementById("btn-display");
-const hideToysListButton = document.getElementById("btn-hide");
-const toysList = document.getElementById("toys-list");
+const displayToysListButton = document.getElementById("displayToysListButton");
+const hideToysListButton = document.getElementById("hideToysListButton");
+const toysList = document.getElementById("toysList");
 
 function displayToysList() {
   if (toysList.style.display === "none" || toysList.style.display === "") {

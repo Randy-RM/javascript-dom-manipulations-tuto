@@ -26,3 +26,12 @@ const createTaskItem = (value) => {
 
   return newTaskListItem;
 };
+
+const addTaskItemToTaskList = () => {
+  const inputTaskValue = String(inputTask.value);
+  if (hasOnlySpaces(inputTaskValue)) {
+    const newTaskListItem = createTaskItem(inputTaskValue);
+    taskList.prepend(newTaskListItem);
+  }
+  inputTask.value = "";
+};

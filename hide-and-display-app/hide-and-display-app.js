@@ -13,3 +13,6 @@ function hideToysList() {
     toysList.style.display = "none";
   }
 }
+
+displayToysListButton.addEventListener("click", displayToysList);
+hideToysListButton.addEventListener("click", hideToysList);

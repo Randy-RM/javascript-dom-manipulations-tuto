@@ -3,7 +3,7 @@ const addTaskButton = document.getElementById("addTaskButton");
 const taskList = document.getElementById("taskList");
 
 const hasOnlySpaces = (value) => {
-  return value.trim().length != 0;
+  return value.trim().length == 0;
 };
 
 const createDeleteButton = () => {
@@ -29,7 +29,7 @@ const createTaskItem = (value) => {
 
 const addTaskItemToTaskList = () => {
   const inputTaskValue = String(inputTask.value);
-  if (hasOnlySpaces(inputTaskValue)) {
+  if (!hasOnlySpaces(inputTaskValue)) {
     const newTaskListItem = createTaskItem(inputTaskValue);
     taskList.prepend(newTaskListItem);
   }

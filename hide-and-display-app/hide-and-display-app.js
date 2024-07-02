@@ -7,3 +7,9 @@ function displayToysList() {
     toysList.style.display = "block";
   }
 }
+
+function hideToysList() {
+  if (toysList.style.display === "block" || toysList.style.display === "") {
+    toysList.style.display = "none";
+  }
+}

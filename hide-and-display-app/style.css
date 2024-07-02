@@ -1,0 +1,51 @@
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bolder;
+  color: #ffffff;
+  background-color: #4982f3;
+}
+
+.btn {
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  padding: 1rem 2rem;
+}
+
+.btn-hide {
+  color: #ffffff;
+  background-color: #d8403b;
+  transition: ease-in-out all 0.3s;
+}
+
+.btn-hide:hover,
+.btn-hide:focus {
+  background-color: #ff4842;
+}
+
+.btn-display {
+  color: #ffffff;
+  background-color: #3b9ed8;
+  transition: ease-in-out all 0.3s;
+}
+
+.btn-display:hover,
+.btn-display:focus {
+  background-color: #45bbff;
+}
+
+.toys-list {
+  background: #dcdcdc;
+  padding: 2rem;
+  display: block;
+  transition: ease-in-out all 0.3s;
+}
+
+.toys-list li {
+  padding: 0.5rem;
+}

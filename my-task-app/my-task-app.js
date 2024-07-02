@@ -16,3 +16,13 @@ const createDeleteButton = () => {
   });
   return buttonDeleteTaskItem;
 };
+
+const createTaskItem = (value) => {
+  const newTaskListItem = document.createElement("li");
+  const taskItemText = document.createTextNode(value.trim());
+  const buttonDeleteTaskItem = createDeleteButton();
+  newTaskListItem.appendChild(taskItemText);
+  newTaskListItem.appendChild(buttonDeleteTaskItem);
+
+  return newTaskListItem;
+};

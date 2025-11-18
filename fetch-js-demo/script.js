@@ -191,110 +191,110 @@ async function fetchPosts() {
     handleFetchError(error);
   }
 
-/**
- * Fetches data from the API
- * @returns {Promise<Array>} Posts data
- */
-async function fetchDataFromAPI() {
-  const response = await fetch(API_CONFIG.BASE_URL);
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
+  /**
+   * Fetches data from the API
+   * @returns {Promise<Array>} Posts data
+   */
+  async function fetchDataFromAPI() {
+    const response = await fetch(API_CONFIG.BASE_URL);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return response.json();
   }
-  return response.json();
-}
 
-/**
- * Validates and returns posts data
- * @param {*} data - Data to validate
- * @returns {Array} Validated posts array
- */
-function validatePostsData(data) {
-  return Array.isArray(data) ? data : [];
-}
+  /**
+   * Validates and returns posts data
+   * @param {*} data - Data to validate
+   * @returns {Array} Validated posts array
+   */
+  function validatePostsData(data) {
+    return Array.isArray(data) ? data : [];
+  }
 
-/**
- * Simulates network delay for skeleton visibility
- * @returns {Promise<void>}
- */
-function simulateNetworkDelay() {
-  return new Promise((resolve) =>
-    setTimeout(resolve, API_CONFIG.SKELETON_DELAY)
-  );
-}
+  /**
+   * Simulates network delay for skeleton visibility
+   * @returns {Promise<void>}
+   */
+  function simulateNetworkDelay() {
+    return new Promise((resolve) =>
+      setTimeout(resolve, API_CONFIG.SKELETON_DELAY)
+    );
+  }
 
-/**
- * Renders posts for the current page
- */
-function renderCurrentPage() {
-  const posts = getPostsForCurrentPage();
-  clearPostsContainer();
-  renderPosts(posts);
+  /**
+   * Renders posts for the current page
+   */
+  function renderCurrentPage() {
+    const posts = getPostsForCurrentPage();
+    clearPostsContainer();
+    renderPosts(posts);
     renderPagination();
-}
-
-/**
- * Gets posts for the current page
- * @returns {Array} Posts for current page
- */
-function getPostsForCurrentPage() {
-  const startIndex = (currentPage - 1) * PAGINATION_CONFIG.POSTS_PER_PAGE;
-  const endIndex = startIndex + PAGINATION_CONFIG.POSTS_PER_PAGE;
-  return allPosts.slice(startIndex, endIndex);
-}
-
-/**
- * Renders an array of posts
- * @param {Array} posts - Posts to render
- */
-function renderPosts(posts) {
-  const postCards = posts.map(createPostCard);
-  appendElementsToContainer(DOM.postsContainer, postCards);
-}
-
-/**
- * Renders pagination controls
- */
-function renderPagination() {
-  const totalPages = getTotalPages();
-  if (totalPages <= 1) {
-    DOM.paginationContainer.innerHTML = "";
-    return;
   }
+
+  /**
+   * Gets posts for the current page
+   * @returns {Array} Posts for current page
+   */
+  function getPostsForCurrentPage() {
+    const startIndex = (currentPage - 1) * PAGINATION_CONFIG.POSTS_PER_PAGE;
+    const endIndex = startIndex + PAGINATION_CONFIG.POSTS_PER_PAGE;
+    return allPosts.slice(startIndex, endIndex);
+  }
+
+  /**
+   * Renders an array of posts
+   * @param {Array} posts - Posts to render
+   */
+  function renderPosts(posts) {
+    const postCards = posts.map(createPostCard);
+    appendElementsToContainer(DOM.postsContainer, postCards);
+  }
+
+  /**
+   * Renders pagination controls
+   */
+  function renderPagination() {
+    const totalPages = getTotalPages();
+    if (totalPages <= 1) {
+      DOM.paginationContainer.innerHTML = "";
+      return;
+    }
 
     DOM.paginationContainer.innerHTML = getMinimalPaginationHTML(totalPages);
-  attachPaginationEventListeners();
-}
-
-/**
- * Calculates total number of pages
- * @returns {number} Total pages
- */
-function getTotalPages() {
-  return Math.ceil(allPosts.length / PAGINATION_CONFIG.POSTS_PER_PAGE);
-}
-
-/**
- * Generates pagination HTML
- * @param {number} totalPages - Total number of pages
- * @returns {string} Pagination HTML
- */
-function getPaginationHTML(totalPages) {
-  const buttons = [];
-
-  buttons.push(getPaginationButton("prev", "Précédent", currentPage === 1));
-
-  for (let i = 1; i <= totalPages; i++) {
-    buttons.push(getPaginationPageButton(i, currentPage === i));
+    attachPaginationEventListeners();
   }
 
-  buttons.push(
-    getPaginationButton("next", "Suivant", currentPage === totalPages)
-  );
+  /**
+   * Calculates total number of pages
+   * @returns {number} Total pages
+   */
+  function getTotalPages() {
+    return Math.ceil(allPosts.length / PAGINATION_CONFIG.POSTS_PER_PAGE);
+  }
 
-  return `<div class="flex justify-center gap-2 mt-8">${buttons.join(
-    ""
-  )}</div>`;
-}
+  /**
+   * Generates pagination HTML
+   * @param {number} totalPages - Total number of pages
+   * @returns {string} Pagination HTML
+   */
+  function getPaginationHTML(totalPages) {
+    const buttons = [];
+
+    buttons.push(getPaginationButton("prev", "Précédent", currentPage === 1));
+
+    for (let i = 1; i <= totalPages; i++) {
+      buttons.push(getPaginationPageButton(i, currentPage === i));
+    }
+
+    buttons.push(
+      getPaginationButton("next", "Suivant", currentPage === totalPages)
+    );
+
+    return `<div class="flex justify-center gap-2 mt-8">${buttons.join(
+      ""
+    )}</div>`;
+  }
 
   /**
    * Generates minimal pagination HTML
@@ -320,9 +320,13 @@ function getPaginationHTML(totalPages) {
     parts.push(getPaginationSummary(totalPages));
 
     // Next button
-    parts.push(getPaginationButton("next", "Suivant", currentPage === totalPages));
+    parts.push(
+      getPaginationButton("next", "Suivant", currentPage === totalPages)
+    );
 
-    return `<div class="flex justify-center items-center gap-2 mt-8">${parts.join('')}</div>`;
+    return `<div class="flex justify-center items-center gap-2 mt-8">${parts.join(
+      ""
+    )}</div>`;
   }
 }
 
@@ -354,11 +358,11 @@ function getPaginationButton(type, label, isDisabled) {
  * @returns {string} Button HTML
  */
 function getPaginationPageButton(pageNum, isCurrent, isEnabled = true) {
-  const base = 'px-4 py-2 text-white font-medium transition-colors';
-  const active = isCurrent ? ' bg-blue-600 font-bold' : ' bg-blue-500';
-  const hover = isCurrent || !isEnabled ? '' : ' hover:bg-blue-600';
-  const disabled = !isEnabled ? ' opacity-60 cursor-not-allowed' : '';
-  const attrs = `data-page="${pageNum}" ${!isEnabled ? 'disabled' : ''}`;
+  const base = "px-4 py-2 text-white font-medium transition-colors";
+  const active = isCurrent ? " bg-blue-600 font-bold" : " bg-blue-500";
+  const hover = isCurrent || !isEnabled ? "" : " hover:bg-blue-600";
+  const disabled = !isEnabled ? " opacity-60 cursor-not-allowed" : "";
+  const attrs = `data-page="${pageNum}" ${!isEnabled ? "disabled" : ""}`;
   return `<button class="${base}${active}${hover}${disabled}" ${attrs}>${pageNum}</button>`;
 }
 
@@ -386,14 +390,16 @@ function attachPaginationEventListeners() {
  * @param {Event} event - Click event
  */
 function handlePaginationClick(event) {
-  const pageValue = event.target.dataset.page;
+  const btn = event.currentTarget || event.target.closest('button');
+  if (!btn) return;
+  const pageValue = btn.dataset.page;
 
   if (pageValue === "prev" && currentPage > 1) {
     currentPage--;
   } else if (pageValue === "next" && currentPage < getTotalPages()) {
     currentPage++;
   } else if (!isNaN(pageValue)) {
-    currentPage = parseInt(pageValue);
+    currentPage = parseInt(pageValue, 10);
   }
 
   renderCurrentPage();

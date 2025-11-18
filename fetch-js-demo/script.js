@@ -390,15 +390,16 @@ function attachPaginationEventListeners() {
  * @param {Event} event - Click event
  */
 function handlePaginationClick(event) {
-  const btn = event.currentTarget || event.target.closest('button');
+  const btn = event.currentTarget || event.target.closest("button");
   if (!btn) return;
   const pageValue = btn.dataset.page;
+  const totalPages = Math.ceil(allPosts.length / PAGINATION_CONFIG.POSTS_PER_PAGE);
 
   if (pageValue === "prev" && currentPage > 1) {
     currentPage--;
-  } else if (pageValue === "next" && currentPage < getTotalPages()) {
+  } else if (pageValue === "next" && currentPage < totalPages) {
     currentPage++;
-  } else if (!isNaN(pageValue)) {
+  } else if (!Number.isNaN(Number(pageValue))) {
     currentPage = parseInt(pageValue, 10);
   }
 

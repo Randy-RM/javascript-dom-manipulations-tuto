@@ -4,12 +4,12 @@
 const API_CONFIG = {
   BASE_URL: "https://jsonplaceholder.typicode.com/posts",
   SKELETON_DELAY: 500,
-  ANIMATION_DELAY: 150
+  ANIMATION_DELAY: 150,
 };
 
 const PAGINATION_CONFIG = {
   POSTS_PER_PAGE: 6,
-  SKELETON_COUNT: 6
+  SKELETON_COUNT: 6,
 };
 
 // DOM Elements
@@ -24,7 +24,7 @@ const DOM = {
   modalBody: document.getElementById("modalBody"),
   modalContent: document.getElementById("modalContent"),
   closeModal: document.getElementById("closeModal"),
-  closeModalBtn: document.getElementById("closeModalBtn")
+  closeModalBtn: document.getElementById("closeModalBtn"),
 };
 
 // Application State
@@ -98,10 +98,16 @@ function createPostCard(post) {
 function getPostCardHTML(post) {
   return `
     <header class="mb-3">
-      <h2 class="text-lg font-medium text-gray-800">${escapeHtml(post.title)}</h2>
-      <div class="text-xs text-gray-600 mt-1 font-medium">Post #${post.id} • User ${post.userId}</div>
+      <h2 class="text-lg font-medium text-gray-800">${escapeHtml(
+        post.title
+      )}</h2>
+      <div class="text-xs text-gray-600 mt-1 font-medium">Post #${
+        post.id
+      } • User ${post.userId}</div>
     </header>
-    <p class="text-gray-700 mt-2 line-clamp-3 leading-relaxed">${escapeHtml(post.body)}</p>
+    <p class="text-gray-700 mt-2 line-clamp-3 leading-relaxed">${escapeHtml(
+      post.body
+    )}</p>
   `;
 }
 
@@ -113,13 +119,13 @@ function getPostCardHTML(post) {
 function escapeHtml(str) {
   if (!str) return "";
   const htmlEntities = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
   };
-  return str.replace(/[&<>"']/g, char => htmlEntities[char]);
+  return str.replace(/[&<>"']/g, (char) => htmlEntities[char]);
 }
 
 /**
@@ -135,7 +141,7 @@ function clearPostsContainer() {
  * @param {HTMLElement[]} elements - Elements to append
  */
 function appendElementsToContainer(container, elements) {
-  elements.forEach(element => container.appendChild(element));
+  elements.forEach((element) => container.appendChild(element));
 }
 
 /**
@@ -175,7 +181,7 @@ function enableBodyScroll() {
 async function fetchPosts() {
   hideError();
   showSkeletons();
-  
+
   try {
     const data = await fetchDataFromAPI();
     allPosts = validatePostsData(data);
@@ -184,7 +190,6 @@ async function fetchPosts() {
   } catch (error) {
     handleFetchError(error);
   }
-}
 
 /**
  * Fetches data from the API
@@ -212,7 +217,9 @@ function validatePostsData(data) {
  * @returns {Promise<void>}
  */
 function simulateNetworkDelay() {
-  return new Promise((resolve) => setTimeout(resolve, API_CONFIG.SKELETON_DELAY));
+  return new Promise((resolve) =>
+    setTimeout(resolve, API_CONFIG.SKELETON_DELAY)
+  );
 }
 
 /**
@@ -222,7 +229,7 @@ function renderCurrentPage() {
   const posts = getPostsForCurrentPage();
   clearPostsContainer();
   renderPosts(posts);
-  renderPagination();
+    renderPagination();
 }
 
 /**
@@ -253,8 +260,8 @@ function renderPagination() {
     DOM.paginationContainer.innerHTML = "";
     return;
   }
-  
-  DOM.paginationContainer.innerHTML = getPaginationHTML(totalPages);
+
+    DOM.paginationContainer.innerHTML = getMinimalPaginationHTML(totalPages);
   attachPaginationEventListeners();
 }
 
@@ -273,16 +280,50 @@ function getTotalPages() {
  */
 function getPaginationHTML(totalPages) {
   const buttons = [];
-  
-  buttons.push(getPaginationButton('prev', 'Précédent', currentPage === 1));
-  
+
+  buttons.push(getPaginationButton("prev", "Précédent", currentPage === 1));
+
   for (let i = 1; i <= totalPages; i++) {
     buttons.push(getPaginationPageButton(i, currentPage === i));
   }
-  
-  buttons.push(getPaginationButton('next', 'Suivant', currentPage === totalPages));
-  
-  return `<div class="flex justify-center gap-2 mt-8">${buttons.join('')}</div>`;
+
+  buttons.push(
+    getPaginationButton("next", "Suivant", currentPage === totalPages)
+  );
+
+  return `<div class="flex justify-center gap-2 mt-8">${buttons.join(
+    ""
+  )}</div>`;
+}
+
+  /**
+   * Generates minimal pagination HTML
+   * @param {number} totalPages - Total number of pages
+   * @returns {string} Minimal pagination HTML
+   */
+  function getMinimalPaginationHTML(totalPages) {
+    const parts = [];
+
+    // Prev button
+    parts.push(getPaginationButton("prev", "Précédent", currentPage === 1));
+
+    // First page button (acts as Home). If current is 1, it’s highlighted and disabled.
+    const isFirstCurrent = currentPage === 1;
+    parts.push(getPaginationPageButton(1, isFirstCurrent, !isFirstCurrent));
+
+    // Current page button (only if not first), highlighted and disabled
+    if (!isFirstCurrent) {
+      parts.push(getPaginationPageButton(currentPage, true, false));
+    }
+
+    // Total pages summary
+    parts.push(getPaginationSummary(totalPages));
+
+    // Next button
+    parts.push(getPaginationButton("next", "Suivant", currentPage === totalPages));
+
+    return `<div class="flex justify-center items-center gap-2 mt-8">${parts.join('')}</div>`;
+  }
 }
 
 /**
@@ -293,12 +334,14 @@ function getPaginationHTML(totalPages) {
  * @returns {string} Button HTML
  */
 function getPaginationButton(type, label, isDisabled) {
-  const disabledClass = isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600';
+  const disabledClass = isDisabled
+    ? "opacity-50 cursor-not-allowed"
+    : "hover:bg-blue-600";
   return `
     <button 
       class="px-4 py-2 bg-blue-500 text-white font-medium transition-colors ${disabledClass}" 
       data-page="${type}"
-      ${isDisabled ? 'disabled' : ''}>
+      ${isDisabled ? "disabled" : ""}>
       ${label}
     </button>
   `;
@@ -310,26 +353,31 @@ function getPaginationButton(type, label, isDisabled) {
  * @param {boolean} isCurrent - Whether this is the current page
  * @returns {string} Button HTML
  */
-function getPaginationPageButton(pageNum, isCurrent) {
-  const activeClass = isCurrent 
-    ? 'bg-blue-600 font-bold' 
-    : 'bg-blue-500 hover:bg-blue-600';
-  return `
-    <button 
-      class="px-4 py-2 text-white font-medium transition-colors ${activeClass}" 
-      data-page="${pageNum}">
-      ${pageNum}
-    </button>
-  `;
+function getPaginationPageButton(pageNum, isCurrent, isEnabled = true) {
+  const base = 'px-4 py-2 text-white font-medium transition-colors';
+  const active = isCurrent ? ' bg-blue-600 font-bold' : ' bg-blue-500';
+  const hover = isCurrent || !isEnabled ? '' : ' hover:bg-blue-600';
+  const disabled = !isEnabled ? ' opacity-60 cursor-not-allowed' : '';
+  const attrs = `data-page="${pageNum}" ${!isEnabled ? 'disabled' : ''}`;
+  return `<button class="${base}${active}${hover}${disabled}" ${attrs}>${pageNum}</button>`;
+}
+
+/**
+ * Creates a textual summary for total pages
+ * @param {number} totalPages - Total page count
+ * @returns {string} Summary HTML
+ */
+function getPaginationSummary(totalPages) {
+  return `<span class="mx-2 text-sm text-gray-700">/ ${totalPages}</span>`;
 }
 
 /**
  * Attaches event listeners to pagination buttons
  */
 function attachPaginationEventListeners() {
-  const buttons = DOM.paginationContainer.querySelectorAll('button');
-  buttons.forEach(button => {
-    button.addEventListener('click', handlePaginationClick);
+  const buttons = DOM.paginationContainer.querySelectorAll("button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", handlePaginationClick);
   });
 }
 
@@ -339,15 +387,15 @@ function attachPaginationEventListeners() {
  */
 function handlePaginationClick(event) {
   const pageValue = event.target.dataset.page;
-  
-  if (pageValue === 'prev' && currentPage > 1) {
+
+  if (pageValue === "prev" && currentPage > 1) {
     currentPage--;
-  } else if (pageValue === 'next' && currentPage < getTotalPages()) {
+  } else if (pageValue === "next" && currentPage < getTotalPages()) {
     currentPage++;
   } else if (!isNaN(pageValue)) {
     currentPage = parseInt(pageValue);
   }
-  
+
   renderCurrentPage();
   scrollToTop();
 }
@@ -356,7 +404,7 @@ function handlePaginationClick(event) {
  * Scrolls to the top of the page
  */
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 /**

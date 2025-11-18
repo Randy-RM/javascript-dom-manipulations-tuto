@@ -20,11 +20,15 @@ function showSkeletons(count = 6) {
   postsContainer.innerHTML = "";
   for (let i = 0; i < count; i++) {
     const s = document.createElement("div");
-    s.className = "animate-pulse p-5 bg-white border-t-4 border-gray-300";
+    s.className =
+      "animate-pulse p-5 bg-white border-t-4 border-gray-300 transition-all ease-in-out";
     s.innerHTML = `
-      <div class="h-5 bg-gray-200 w-3/4 mb-3"></div>
-      <div class="h-3 bg-gray-200 w-1/2 mb-4"></div>
-      <div class="space-y-2">
+      <div class="mb-3">
+        <div class="h-5 bg-gray-200 w-3/4 mb-1"></div>
+        <div class="h-3 bg-gray-200 w-1/3 mt-1"></div>
+      </div>
+      <div class="mt-2 space-y-2">
+        <div class="h-3 bg-gray-200"></div>
         <div class="h-3 bg-gray-200"></div>
         <div class="h-3 bg-gray-200 w-5/6"></div>
       </div>
@@ -79,7 +83,7 @@ async function fetchPosts(limit = 9) {
     const posts = Array.isArray(data) ? data.slice(0, limit) : [];
 
     // small artificial delay so skeletons are visible in fast networks
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 2000));
 
     postsContainer.innerHTML = "";
     posts.forEach((p) => postsContainer.appendChild(createPostCard(p)));

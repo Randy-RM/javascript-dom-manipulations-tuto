@@ -1,51 +1,146 @@
-body {
-  font-family: sans-serif;
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background: #ecf0f1;
+  min-height: 100vh;
+}
+
+/* Header */
 h1 {
   font-size: 3rem;
-  font-weight: bolder;
+  font-weight: 300;
   color: #ffffff;
-  background-color: #4982f3;
+  background-color: #3498db;
+  padding: 2.5rem;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 5px solid #2980b9;
 }
 
+/* Main Content */
+main {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+section {
+  background: #ffffff;
+  padding: 30px;
+  margin-bottom: 20px;
+  border-left: 5px solid #3498db;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* Buttons */
 .btn {
-  text-transform: uppercase;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
   border: none;
-  padding: 1rem 2rem;
+  padding: 15px 30px;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin-right: 10px;
+}
+
+.btn:active {
+  transform: scale(0.95);
 }
 
 .btn-hide {
-  color: #ffffff;
-  background-color: #d8403b;
-  transition: ease-in-out all 0.3s;
+  background-color: #e74c3c;
 }
 
-.btn-hide:hover,
-.btn-hide:focus {
-  background-color: #ff4842;
+.btn-hide:hover {
+  background-color: #c0392b;
 }
 
 .btn-display {
-  color: #ffffff;
-  background-color: #3b9ed8;
-  transition: ease-in-out all 0.3s;
+  background-color: #3498db;
 }
 
-.btn-display:hover,
-.btn-display:focus {
-  background-color: #45bbff;
+.btn-display:hover {
+  background-color: #2980b9;
 }
 
+/* Toys List */
 .toys-list {
-  background: #dcdcdc;
-  padding: 2rem;
+  background: #f8f9fa;
+  padding: 0;
   display: block;
-  transition: ease-in-out all 0.3s;
+  list-style: none;
+  margin-top: 20px;
+  border-left: 4px solid #27ae60;
 }
 
 .toys-list li {
-  padding: 0.5rem;
+  padding: 15px 20px;
+  color: #2c3e50;
+  font-size: 17px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.toys-list li:last-child {
+  border-bottom: none;
+}
+
+.toys-list li:hover {
+  background: #ffffff;
+  padding-left: 25px;
+}
+
+/* Accessibility */
+button:focus-visible {
+  outline: 3px solid #2c3e50;
+  outline-offset: 3px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+    padding: 1.5rem;
+  }
+
+  main {
+    padding: 20px 10px;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+
+  .toys-list li {
+    font-size: 16px;
+    padding: 12px 15px;
+  }
 }

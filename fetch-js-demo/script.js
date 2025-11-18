@@ -3,6 +3,12 @@ const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 const postsContainer = document.getElementById("posts");
 const errorEl = document.getElementById("error");
 const refreshBtn = document.getElementById("refreshBtn");
+const postModal = document.getElementById("postModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalMeta = document.getElementById("modalMeta");
+const modalBody = document.getElementById("modalBody");
+const closeModal = document.getElementById("closeModal");
+const closeModalBtn = document.getElementById("closeModalBtn");
 
 // Contract:
 // - inputs: none (fetches POSTS_URL)
@@ -30,7 +36,7 @@ function showSkeletons(count = 6) {
 function createPostCard(post) {
   const el = document.createElement("article");
   el.className =
-    "p-4 bg-white rounded shadow hover:shadow-lg transition-shadow";
+    "p-4 bg-white rounded shadow hover:shadow-lg transition-shadow cursor-pointer";
   el.innerHTML = `
     <header class="mb-2">
       <h2 class="text-lg font-semibold text-gray-800">${escapeHtml(
@@ -40,8 +46,12 @@ function createPostCard(post) {
     post.userId
   }</div>
     </header>
-    <p class="text-gray-700 mt-2">${escapeHtml(post.body)}</p>
+    <p class="text-gray-700 mt-2 line-clamp-3">${escapeHtml(post.body)}</p>
   `;
+
+  // Add click event to show modal
+  el.addEventListener("click", () => showPostDetail(post));
+
   return el;
 }
 
@@ -77,6 +87,64 @@ async function fetchPosts(limit = 9) {
     errorEl.classList.remove("hidden");
   }
 }
+
+// Show post detail in modal
+function showPostDetail(post) {
+  modalTitle.textContent = post.title;
+  modalMeta.textContent = `Post #${post.id} • User ${post.userId}`;
+  modalBody.textContent = post.body;
+
+  const modalContent = document.getElementById("modalContent");
+
+  // Remove hidden class and add fade-in animation
+  postModal.classList.remove("hidden");
+  postModal.classList.remove("modal-fade-out");
+  postModal.classList.add("modal-fade-in");
+
+  // Add scale animation to content
+  modalContent.classList.remove("modal-content-out");
+  modalContent.classList.add("modal-content-in");
+
+  document.body.style.overflow = "hidden"; // Prevent scrolling
+}
+
+// Close modal
+function hidePostDetail() {
+  const modalContent = document.getElementById("modalContent");
+
+  // Add fade-out animations
+  postModal.classList.remove("modal-fade-in");
+  postModal.classList.add("modal-fade-out");
+
+  modalContent.classList.remove("modal-content-in");
+  modalContent.classList.add("modal-content-out");
+
+  // Wait for animation to complete before hiding
+  setTimeout(() => {
+    postModal.classList.add("hidden");
+    postModal.classList.remove("modal-fade-out");
+    modalContent.classList.remove("modal-content-out");
+  }, 150);
+
+  document.body.style.overflow = ""; // Restore scrolling
+}
+
+closeModal.addEventListener("click", hidePostDetail);
+closeModalBtn.addEventListener("click", hidePostDetail);
+
+// Close modal when clicking outside
+postModal.addEventListener("click", (e) => {
+  if (e.target === postModal) {
+    hidePostDetail();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !postModal.classList.contains("hidden")) {
+    hidePostDetail();
+  }
+});
 
 refreshBtn.addEventListener("click", () => fetchPosts());
 

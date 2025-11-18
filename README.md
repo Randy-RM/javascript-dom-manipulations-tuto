@@ -6,10 +6,10 @@ This project gathers several mini-apps to help you learn DOM manipulation with J
 
 ## 📦 Project Structure
 
-- `counter-app/`: Counter application (+, -, reset) with flat and responsive design.
-- `hide-and-display-app/`: App to show or hide a toy list, with styled buttons and accessibility.
-- `my-task-app/`: Task manager (add, edit, delete) with inline editing, validation, and flat design.
-- `fetch-js-demo/`: Demo using `fetch` to load data and display skeletons (see its dedicated README).
+- `counter-app/`: ⭐ Counter application (+, -, reset) with flat and responsive design.
+- `hide-and-display-app/`: ⭐⭐ App to show or hide a toy list, with styled buttons and accessibility.
+- `my-task-app/`: ⭐⭐⭐ Task manager (add, edit, delete) with inline editing, validation, and flat design.
+- `fetch-js-demo/`: ⭐⭐⭐⭐ Demo using `fetch` to load data, pagination, modals, and skeleton loading (see its dedicated README).
 
 ## ✨ Main Features
 
@@ -23,21 +23,27 @@ Open each folder and launch the `index.html` file in your browser.
 
 ## 📚 App Details
 
-- **Counter App**:
+- **Counter App** ⭐:
   - Interactive counter with +, -, reset buttons
   - Flat design, responsive, accessibility
+  - *Perfect for beginners learning event listeners and DOM updates*
 
-- **Hide and Display App**:
+- **Hide and Display App** ⭐⭐:
   - Show or hide a toy list
   - Styled buttons, scale effect, responsive
+  - *Learn DOM manipulation and CSS class toggling*
 
-- **My Task App**:
+- **My Task App** ⭐⭐⭐:
   - Add, edit, delete tasks
   - Inline editing, validation, flat design
+  - *Advanced: state management, form validation, CRUD operations*
 
-- **Fetch JS Demo**:
-  - Fetches posts, displays skeletons then cards
+- **Fetch JS Demo** ⭐⭐⭐⭐:
+  - Fetches posts from API with pagination
+  - Modal details view with animations
+  - Skeleton loading states
   - Uses Tailwind CDN for styling
+  - *Advanced: async/await, API calls, pagination logic, clean code architecture*
 
 ---
 

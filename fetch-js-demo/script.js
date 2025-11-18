@@ -8,8 +8,8 @@ const API_CONFIG = {
 };
 
 const PAGINATION_CONFIG = {
-  POSTS_PER_PAGE: 6,
-  SKELETON_COUNT: 6,
+  POSTS_PER_PAGE: 9,
+  SKELETON_COUNT: 9,
 };
 
 // DOM Elements

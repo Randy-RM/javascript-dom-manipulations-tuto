@@ -20,13 +20,13 @@ function showSkeletons(count = 6) {
   postsContainer.innerHTML = "";
   for (let i = 0; i < count; i++) {
     const s = document.createElement("div");
-    s.className = "animate-pulse p-4 bg-white rounded shadow";
+    s.className = "animate-pulse p-5 bg-white border-t-4 border-gray-300";
     s.innerHTML = `
-      <div class="h-4 bg-gray-200 rounded w-3/4 mb-3"></div>
-      <div class="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
+      <div class="h-5 bg-gray-200 w-3/4 mb-3"></div>
+      <div class="h-3 bg-gray-200 w-1/2 mb-4"></div>
       <div class="space-y-2">
-        <div class="h-3 bg-gray-200 rounded"></div>
-        <div class="h-3 bg-gray-200 rounded w-5/6"></div>
+        <div class="h-3 bg-gray-200"></div>
+        <div class="h-3 bg-gray-200 w-5/6"></div>
       </div>
     `;
     postsContainer.appendChild(s);
@@ -36,17 +36,19 @@ function showSkeletons(count = 6) {
 function createPostCard(post) {
   const el = document.createElement("article");
   el.className =
-    "p-4 bg-white rounded shadow hover:shadow-lg transition-shadow cursor-pointer";
+    "p-5 bg-white border-t-4 border-blue-500 hover:bg-gray-50 transition-all cursor-pointer";
   el.innerHTML = `
-    <header class="mb-2">
-      <h2 class="text-lg font-semibold text-gray-800">${escapeHtml(
+    <header class="mb-3">
+      <h2 class="text-lg font-medium text-gray-800">${escapeHtml(
         post.title
       )}</h2>
-      <div class="text-xs text-gray-500">Post #${post.id} • user ${
-    post.userId
-  }</div>
+      <div class="text-xs text-gray-600 mt-1 font-medium">Post #${
+        post.id
+      } • User ${post.userId}</div>
     </header>
-    <p class="text-gray-700 mt-2 line-clamp-3">${escapeHtml(post.body)}</p>
+    <p class="text-gray-700 mt-2 line-clamp-3 leading-relaxed">${escapeHtml(
+      post.body
+    )}</p>
   `;
 
   // Add click event to show modal

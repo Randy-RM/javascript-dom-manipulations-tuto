@@ -10,21 +10,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-50 min-h-screen text-gray-800">
-    <header class="bg-white shadow">
-        <div class="max-w-4xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-semibold">Posts (fetch + skeletons)</h1>
-            <p class="mt-1 text-sm text-gray-500">Exemple avec <code>https://jsonplaceholder.typicode.com/posts</code>
+<body class="bg-gray-100 min-h-screen text-gray-800">
+    <header class="bg-blue-500 border-b-4 border-blue-600">
+        <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-light text-white uppercase tracking-wider">Posts Demo</h1>
+            <p class="mt-2 text-sm text-blue-100">Fetch API + Skeletons + Modal
             </p>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto p-4">
-        <div class="flex justify-between items-center mb-4">
-            <div class="text-sm text-gray-600">Chargement asynchrone avec skeletons</div>
+        <div class="flex justify-between items-center mb-6">
+            <div class="text-sm text-gray-700 font-medium">Chargement asynchrone avec skeletons</div>
             <div>
                 <button id="refreshBtn"
-                    class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Rafraîchir</button>
+                    class="px-5 py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 transition-colors active:scale-95 transform">Rafraîchir</button>
             </div>
         </div>
 
@@ -35,20 +35,21 @@
         <!-- Modal for post detail -->
         <div id="postModal"
             class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div id="modalContent" class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h2 id="modalTitle" class="text-2xl font-bold text-gray-800"></h2>
+            <div id="modalContent"
+                class="bg-white border-t-4 border-blue-500 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 id="modalTitle" class="text-2xl font-normal text-gray-800"></h2>
                         <button id="closeModal"
-                            class="text-gray-500 hover:text-gray-700 text-2xl font-bold">&times;</button>
+                            class="text-gray-500 hover:text-gray-700 text-3xl font-light leading-none">&times;</button>
                     </div>
-                    <div class="mb-4">
-                        <span id="modalMeta" class="text-sm text-gray-500"></span>
+                    <div class="mb-6">
+                        <span id="modalMeta" class="text-sm text-gray-600 font-medium"></span>
                     </div>
-                    <div id="modalBody" class="text-gray-700 leading-relaxed"></div>
-                    <div class="mt-6 pt-4 border-t">
+                    <div id="modalBody" class="text-gray-700 leading-relaxed text-base"></div>
+                    <div class="mt-8 pt-6 border-t border-gray-200">
                         <button id="closeModalBtn"
-                            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Fermer</button>
+                            class="px-6 py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 transition-colors active:scale-95 transform">Fermer</button>
                     </div>
                 </div>
             </div>
